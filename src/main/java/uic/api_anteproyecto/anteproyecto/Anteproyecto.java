@@ -12,7 +12,17 @@ public class Anteproyecto {
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private Long id;
- private String nombre;
- private String codigo;
- private double precio;
+ private String fecha;
+ private String linea_investigacion;
+ private String tema;
+ private String problema;
+ private String objetivo_general;
+ private String objetivo_especifico;
+ private String justificacion;
+ private String alcance;
+ private String teorico;
+ private String metodologico;
+ private String metodologia;
+ private String bibliografia;
+ private String presupuesto;
 }

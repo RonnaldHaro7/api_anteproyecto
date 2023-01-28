@@ -1,4 +1,6 @@
 package uic.api_anteproyecto.solicitud_anteproyecto;
+
+import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +13,8 @@ public class SolicitudAnteproyecto {
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private Long id;
- private String nombre;
- private String codigo;
- private double precio;
+ private String tema;
+ private String nombre_profesor;
+ private String periodo_lectivo;
+ private Date fecha;
 }
