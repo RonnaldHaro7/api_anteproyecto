@@ -20,7 +20,7 @@ public class    SolicitudAnteproyectoController {
  public List<SolicitudAnteproyecto> findAll(){
  return solicitudAnteproyectoService.findAll();
  }
- @GetMapping("/{id}")
+ @GetMapping("/{id}/")
  public SolicitudAnteproyecto findById(@PathVariable Long id){
  return solicitudAnteproyectoService.findById(id);
  }
