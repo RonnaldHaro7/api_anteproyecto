@@ -51,19 +51,19 @@ public class SolicitudPDFService {
             return null;
         
         reportParameters.put("fecha",Date.valueOf(solicitudPDF.getFecha()));
-        reportParameters.put("tema",Date.valueOf(solicitudPDF.getTema()));
-        reportParameters.put("profesor",Date.valueOf(solicitudPDF.getProfesor()));
-        reportParameters.put("periodo_lectivo",Date.valueOf(solicitudPDF.getPeriodo_lectivo()));
+        reportParameters.put("tema",solicitudPDF.getTema());
+        reportParameters.put("profesor",solicitudPDF.getProfesor());
+        reportParameters.put("periodo_lectivo",solicitudPDF.getPeriodo_lectivo());
 
         CustomerDTO estudiante =  customerEstudient.findCustomerById(solicitudPDF.getEstudianteId());
         reportParameters.put("name", estudiante.getName());
         reportParameters.put("nro_identificacion", estudiante.getNro_identificacion());
-        reportParameters.put("date_of_bird", estudiante.getDate_of_bird());
+        reportParameters.put("career", estudiante.getCareer());
         reportParameters.put("email", estudiante.getEmail());
         reportParameters.put("cellphone", estudiante.getCellphone());
         
         List<Map<String, Object>> dataList = new ArrayList<>();
-        
+
         reportParameters.put("solicitudPDFData", new JRBeanCollectionDataSource(dataList));
 
         JasperPrint reportJasperPrint = null;
