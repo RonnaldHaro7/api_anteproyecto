@@ -70,7 +70,7 @@ public class SolicitudPDFService {
         try {
             reportJasperPrint = JasperFillManager.fillReport(
                     JasperCompileManager.compileReport(
-                            ResourceUtils.getFile("classpath:jrxml/factura.jrxml")
+                            ResourceUtils.getFile("classpath:jrxml/solicitudanteproyecto.jrxml")
                                     .getAbsolutePath()) // path of the jasper report
                     , reportParameters // dynamic parameters
                     , new JREmptyDataSource());

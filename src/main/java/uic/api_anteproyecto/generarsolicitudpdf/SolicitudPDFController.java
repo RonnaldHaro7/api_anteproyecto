@@ -57,7 +57,7 @@ public class SolicitudPDFController {
     }
 
     @GetMapping("/pdf/{id}/")
-	public ResponseEntity<byte[]> getFacturaReporte(@PathVariable long id) throws JRException {
+	public ResponseEntity<byte[]> getSolicitudPDFReporte(@PathVariable long id) throws JRException {
 
 		JasperPrint reporte = solicitudPDFService.getSolicitudPDFReporte(id);
         
