@@ -2,7 +2,6 @@ package uic.api_anteproyecto.generarsolicitudpdf;
 
 import java.io.FileNotFoundException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +17,14 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 
 @Transactional
 @Service
 public class SolicitudPDFService {
     @Autowired SolicitudPDFRepository solicitudPDFRepository;
     @Autowired CustomerEstudient customerEstudient;
+    @Autowired CustomerEstudient customerSolicitud;
 
     @Transactional
     public SolicitudPDF save(SolicitudPDF entity){
@@ -50,27 +50,23 @@ public class SolicitudPDFService {
         if (solicitudPDF.getId()==null)
             return null;
         
+        reportParameters.put("tema", solicitudPDF.getTema());
+        reportParameters.put("periodo_lectivo", solicitudPDF.getPeriodo_lectivo());
+        reportParameters.put("profesor", solicitudPDF.getProfesor());
         reportParameters.put("fecha",Date.valueOf(solicitudPDF.getFecha()));
-        reportParameters.put("tema",solicitudPDF.getTema());
-        reportParameters.put("profesor",solicitudPDF.getProfesor());
-        reportParameters.put("periodo_lectivo",solicitudPDF.getPeriodo_lectivo());
-
+        
         CustomerDTO estudiante =  customerEstudient.findCustomerById(solicitudPDF.getEstudianteId());
         reportParameters.put("name", estudiante.getName());
         reportParameters.put("nro_identificacion", estudiante.getNro_identificacion());
         reportParameters.put("career", estudiante.getCareer());
         reportParameters.put("email", estudiante.getEmail());
         reportParameters.put("cellphone", estudiante.getCellphone());
-        
-        List<Map<String, Object>> dataList = new ArrayList<>();
-
-        reportParameters.put("solicitudPDFData", new JRBeanCollectionDataSource(dataList));
 
         JasperPrint reportJasperPrint = null;
         try {
             reportJasperPrint = JasperFillManager.fillReport(
                     JasperCompileManager.compileReport(
-                            ResourceUtils.getFile("classpath:jrxml/solicitudanteproyecto.jrxml")
+                            ResourceUtils.getFile("classpath:jrxml/solicitud.jrxml")
                                     .getAbsolutePath()) // path of the jasper report
                     , reportParameters // dynamic parameters
                     , new JREmptyDataSource());

@@ -14,5 +14,8 @@ class Solicitud {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tema;
+    private String periodo_lectivo;
+    private String profesor;
+    private String fecha;
 
 }
